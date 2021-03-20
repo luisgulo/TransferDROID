@@ -1,0 +1,37 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,58,41)
+  Text = ("TransferDROID")
+  Icon = Picture["android-device-phone-icon_48-verde.png"]
+  Resizable = False
+  { botonAbrir ToolButton
+    MoveScaled(20,13,6,10)
+    Picture = Picture["android-device-phone-icon_48.png"]
+    Border = True
+  }
+  { txt1 TextLabel
+    MoveScaled(2,1,53,4)
+    Text = ("1. Conecte el telefono con el cable USB")
+  }
+  { txt2 TextLabel
+    MoveScaled(2,5,53,4)
+    Text = ("2. Seleccione en su teléfono:  'Transferir archivos'")
+  }
+  { txt3 TextLabel
+    MoveScaled(2,9,53,4)
+    Text = ("3. Pulse sobre el icono de Android para acceder al teléfono")
+  }
+  { txt3a TextLabel
+    MoveScaled(8,24,47,8)
+    Text = ("El icono se iluminará en verde, y se abrirá el gestor de ficheros predeterminado, y podrá copiar/mover ficheros a su teléfono.")
+  }
+  { txt4 TextLabel
+    MoveScaled(2,33,53,4)
+    Text = ("4. Pulse sobre el Icono verde para finalizar la conexión.")
+  }
+  { txt5 TextLabel
+    MoveScaled(2,37,53,4)
+    Text = ("5. Desconecte el cable USB del teléfono")
+  }
+}

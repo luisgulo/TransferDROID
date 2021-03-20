@@ -1,0 +1,58 @@
+' Gambas class file
+
+Public Ruta As String
+Public Montado As Boolean
+Private colorNormal As Integer = -1
+Private colorGris As Integer = 8421504
+
+Public Sub Form_Open()
+  Me.Text = "TransferDROID (" & Application.Version & ")"
+  Ruta = User.Home & "/" & "TransferDROID"
+  System.Shell = "/bin/bash"
+  EstaMontado()
+End
+
+Public Sub botonAbrir_Click()
+  If Montado
+    ' Desmontamos el movil
+    Exec ["fusermount", "-u", Ruta] Wait
+    ' Cerramos
+    Me.Close
+    Quit
+  Else
+   ' Recreamos punto de Montaje
+   Exec ["mkdir", "-p", Ruta] Wait
+   ' Montamos el telefono
+   Exec ["jmtpfs", Ruta & "/"] Wait 
+   ' Abrimos el gestor de ficheros del entorno gráfico
+   Shell "/usr/bin/xdg-open " & Ruta   
+  Endif
+  EstaMontado()
+End
+
+Public Function EstaMontado() As Boolean
+
+  Dim valorShell As String
+  Shell "echo -ne $(mount|grep TransferDROID|wc -l|awk '{print $1}')" To valorShell
+  If valorShell = "0"
+    Montado = False
+    botonAbrir.Picture = Picture.Load("android-device-phone-icon_48.png")
+    Message(txt1.Foreground)
+    txt1.Foreground = colorNormal
+    txt2.Foreground = colorNormal
+    txt3.Foreground = colorNormal
+    txt3a.Foreground = colorNormal
+    txt4.Foreground = colorGris
+    txt5.Foreground = colorGris
+  Else
+    Montado = True
+    botonAbrir.Picture = Picture.Load("android-device-phone-icon_48-verde.png")
+    txt1.Foreground = colorGris
+    txt2.Foreground = colorGris
+    txt3.Foreground = colorGris
+    txt3a.Foreground = colorGris
+    txt4.Foreground = colorNormal
+    txt5.Foreground = colorNormal
+  Endif
+  Return Montado
+End
